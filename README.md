@@ -2,7 +2,7 @@
 
 An end-to-end machine learning project that predicts which telecom customers are likely to leave, explains the factors associated with churn, quantifies the monthly revenue at risk, and presents the results in an 8-page Streamlit dashboard.
 
-**Live app:** [PASTE STREAMLIT COMMUNITY CLOUD LINK HERE]
+**Live app:** https://fp-churn-tsqxrn6e86avqpcszde6rc.streamlit.app
 
 **Notebook:** [`notebooks/project_analysis.ipynb`](notebooks/project_analysis.ipynb) documents the full workflow with code, outputs, and interpretation.
 
