@@ -112,7 +112,7 @@ if n_filtered == 0:
     st.warning("No customers match the selected filter criteria. Adjust the filters above to view records.")
 else:
     n_preview = st.selectbox("Rows to display", options=[10, 25, 50, 100], index=1)
-    st.dataframe(filtered_df.head(n_preview), use_container_width="stretch", hide_index=True)
+    st.dataframe(filtered_df.head(n_preview), width="stretch", hide_index=True)
 
     csv_data = filtered_df.to_csv(index=False).encode("utf-8")
     st.download_button(

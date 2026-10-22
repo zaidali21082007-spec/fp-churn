@@ -205,5 +205,18 @@ if submitted:
 
             st.caption("Estimates describe patterns in past data and are not guarantees about any individual customer.")
 
+            result_df = pd.DataFrame([{
+                **raw_row.iloc[0].to_dict(),
+                "Churn_Probability_Pct": round(prob_pct, 1),
+                "Predicted_Result_Threshold_0.50": pred_label,
+                "Risk_Level": risk_level,
+            }])
+            st.download_button(
+                label="Download Prediction Result (CSV)",
+                data=result_df.to_csv(index=False).encode("utf-8"),
+                file_name="churn_prediction_result.csv",
+                mime="text/csv",
+            )
+
         except Exception as exc:
             st.error(f"Prediction failed: {exc}")

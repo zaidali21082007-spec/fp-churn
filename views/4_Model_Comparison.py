@@ -118,8 +118,8 @@ st.info(
 # ── Bar chart: ROC_AUC and Recall across models ──────────────────────────────
 st.subheader("ROC-AUC and Recall by Model")
 
-fig, ax = plt.subplots(figsize=(9, 4.5), facecolor="#0f172a")
-ax.set_facecolor("#1e293b")
+fig, ax = plt.subplots(figsize=(9, 4.5), facecolor="#0a0a0a")
+ax.set_facecolor("#1a0a0c")
 
 x = np.arange(len(metrics_df))
 width = 0.35
@@ -127,7 +127,7 @@ width = 0.35
 roc_vals = metrics_df["ROC_AUC"].to_numpy()
 rec_vals = metrics_df["Recall"].to_numpy()
 
-bars_roc = ax.bar(x - width / 2, roc_vals, width, label="ROC-AUC", color="#38bdf8")
+bars_roc = ax.bar(x - width / 2, roc_vals, width, label="ROC-AUC", color="#d4af37")
 bars_rec = ax.bar(x + width / 2, rec_vals, width, label="Recall", color="#22c55e")
 
 for bar in bars_roc:
@@ -167,7 +167,7 @@ for spine in ["top", "right"]:
     ax.spines[spine].set_visible(False)
 for spine in ["bottom", "left"]:
     ax.spines[spine].set_color("#334155")
-ax.legend(facecolor="#1e293b", edgecolor="#334155", labelcolor="#e2e8f0")
+ax.legend(facecolor="#1a0a0c", edgecolor="#334155", labelcolor="#e2e8f0")
 
 st.pyplot(fig)
 plt.close(fig)
@@ -222,7 +222,7 @@ fig_roc.add_trace(
         y=tpr,
         mode="lines",
         name=f"Random Forest (AUC = {roc_auc_val:.3f})",
-        line=dict(color="#38bdf8", width=2.5),
+        line=dict(color="#d4af37", width=2.5),
     )
 )
 fig_roc.add_trace(

@@ -111,4 +111,4 @@ c8.metric("False Negatives (FN)", f"{current['FN']:,}")
 st.subheader("Threshold Comparison Table")
 fixed_thresholds = [0.20, 0.30, 0.40, 0.50, 0.60, 0.70]
 table_df = pd.DataFrame([compute_metrics(y_true, y_prob, t) for t in fixed_thresholds])
-st.dataframe(table_df, use_container_width=True, hide_index=True)
+st.dataframe(table_df, width="stretch", hide_index=True)

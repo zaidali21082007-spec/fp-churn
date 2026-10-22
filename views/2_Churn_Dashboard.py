@@ -93,4 +93,4 @@ else:
         .reset_index(drop=True)
     )
 
-    st.dataframe(contract_tbl, use_container_width="stretch", hide_index=True)
+    st.dataframe(contract_tbl, width="stretch", hide_index=True)

@@ -32,7 +32,7 @@ st.markdown(
 
         /* ── Sidebar ── */
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0c 100%);
         }
         [data-testid="stSidebar"] * {
             color: #e2e8f0 !important;
@@ -40,7 +40,7 @@ st.markdown(
         [data-testid="stSidebar"] .sidebar-title {
             font-size: 1.1rem;
             font-weight: 700;
-            color: #38bdf8 !important;
+            color: #d4af37 !important;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             margin-bottom: 0.25rem;
@@ -55,7 +55,7 @@ st.markdown(
             font-weight: 500;
         }
         div[role="radiogroup"] label:hover {
-            background: rgba(56, 189, 248, 0.15);
+            background: rgba(212, 175, 55, 0.15);
         }
 
         /* ── Main area ── */
@@ -66,12 +66,12 @@ st.markdown(
 
         /* ── Hero card ── */
         .hero-card {
-            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+            background: linear-gradient(135deg, #550000 0%, #800000 100%);
             border-radius: 16px;
             padding: 2.5rem 3rem;
             margin-bottom: 2rem;
             color: white;
-            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
+            box-shadow: 0 20px 60px rgba(128, 0, 0, 0.3);
         }
         .hero-card h1 {
             font-size: 2.2rem;
@@ -86,15 +86,15 @@ st.markdown(
 
         /* ── Info cards ── */
         .info-card {
-            background: #1e293b;
-            border-left: 4px solid #38bdf8;
+            background: #1a0a0c;
+            border-left: 4px solid #d4af37;
             border-radius: 10px;
             padding: 1.2rem 1.5rem;
             margin-bottom: 1rem;
             color: #e2e8f0;
         }
         .info-card h3 {
-            color: #38bdf8;
+            color: #d4af37;
             margin: 0 0 0.5rem 0;
             font-size: 0.85rem;
             text-transform: uppercase;
@@ -114,9 +114,9 @@ st.markdown(
         /* ── Badge ── */
         .badge {
             display: inline-block;
-            background: rgba(56,189,248,0.15);
-            color: #38bdf8;
-            border: 1px solid rgba(56,189,248,0.4);
+            background: rgba(212, 175, 55,0.15);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55,0.4);
             border-radius: 999px;
             padding: 0.2rem 0.8rem;
             font-size: 0.78rem;
@@ -134,7 +134,7 @@ st.markdown(
 
         /* ── Metric cards ── */
         [data-testid="metric-container"] {
-            background: #1e293b;
+            background: #1a0a0c;
             border-radius: 12px;
             padding: 1rem;
             border: 1px solid #334155;
@@ -142,8 +142,48 @@ st.markdown(
 
         /* ── Scrollbar ── */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    /* ── Headings ── */
+h1 { letter-spacing: -0.02em; }
+h2, h3 { letter-spacing: -0.01em; }
+
+/* ── Metric cards ── */
+[data-testid="metric-container"] {
+    border-top: 3px solid #d4af37;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.15s ease;
+}
+[data-testid="metric-container"]:hover { transform: translateY(-2px); }
+[data-testid="stMetricValue"] { font-weight: 600; }
+
+/* ── Selected sidebar item ── */
+div[role="radiogroup"] label:has(input:checked) {
+    background: rgba(212, 175, 55, 0.18);
+    border-left: 3px solid #d4af37;
+}
+
+/* ── Tables ── */
+[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; }
+
+/* ── Buttons ── */
+.stButton > button,
+.stDownloadButton > button,
+[data-testid="stFormSubmitButton"] > button {
+    border-radius: 8px;
+    border: 1px solid #d4af37;
+    font-weight: 600;
+}
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+[data-testid="stFormSubmitButton"] > button:hover {
+    background: #d4af37;
+    color: #0a0a0a;
+}
+
+/* ── Alerts ── */
+[data-testid="stAlert"] { border-radius: 10px; }
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -188,7 +228,7 @@ with st.sidebar:
         label_visibility="collapsed",
     )
     st.markdown("---")
-    st.caption("© 2025 · Customer Churn Prediction & Retention Dashboard")
+    st.caption("© 2026 · Customer Churn Prediction & Retention Dashboard")
 
 # ── Router ─────────────────────────────────────────────────
 selected_file = nav_options[selected_label]
@@ -291,7 +331,7 @@ if selected_file is None:
             """
             <div class="info-card">
                 <h3>🎓 Student Information</h3>
-                <p><strong>Name 1:</strong> Zaid</p>
+                <p><strong>Name 1:</strong> Zaid Ali</p>
                 <p><strong>Course:</strong> Data Science and Machine Learning</p>
                 <p><strong>Project:</strong> Customer Churn Prediction (Project 2)</p>
                 <p><strong>Academic Year:</strong> 2025 / 2026</p>
@@ -349,3 +389,75 @@ else:
         spec.loader.exec_module(module)
     except Exception as exc:
         st.error(f"⚠️  Could not load page **{selected_file}**: `{exc}`")
+# ── FINAL MAROON / GOLD OVERRIDE (loads last, so it wins over earlier blue rules) ──
+st.markdown(
+    """
+    <style>
+    html body [data-testid="stSidebar"] {
+        background-image: linear-gradient(180deg, #2a0006 0%, #0a0a0a 100%) !important;
+        background-color: #0a0a0a !important;
+        border-right: 1px solid #d4af37 !important;
+    }
+    html body .sidebar-title { color: #d4af37 !important; }
+    html body .hero-card {
+        background: linear-gradient(135deg, #3a0000 0%, #550000 55%, #800000 100%) !important;
+        border: 1px solid #d4af37 !important;
+        box-shadow: 0 20px 60px rgba(85, 0, 0, 0.45) !important;
+    }
+    html body .hero-card h1,
+    html body .hero-card p { color: #f5e6b3 !important; }
+    html body .info-card {
+        background: #1a0a0c !important;
+        border-left: 4px solid #d4af37 !important;
+    }
+    html body .info-card h3 { color: #d4af37 !important; }
+    html body .info-card p,
+    html body .info-card li { color: #e8e0d0 !important; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# ── FINAL OVERRIDE v3: maroon / gold everywhere (loads last) ──
+st.markdown(
+    """
+    <style>
+    html body .badge {
+        background: rgba(212, 175, 55, 0.12) !important;
+        color: #f0d77a !important;
+        border: 1px solid rgba(212, 175, 55, 0.5) !important;
+    }
+    html body .info-card h3 { color: #d4af37 !important; }
+    html body [data-testid="stAlert"],
+    html body [data-baseweb="notification"] {
+        background: #1a0a0c !important;
+        border: 1px solid rgba(212, 175, 55, 0.35) !important;
+        border-left: 4px solid #d4af37 !important;
+        border-radius: 8px !important;
+    }
+    html body [data-testid="stAlert"] *,
+    html body [data-baseweb="notification"] * {
+        color: #f5e6b3 !important;
+    }
+    html body [data-testid="stDownloadButton"] button,
+    html body .stDownloadButton > button,
+    html body .stButton > button,
+    html body [data-testid="stFormSubmitButton"] > button {
+        background: transparent !important;
+        color: #f0d77a !important;
+        border: 1px solid #d4af37 !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+    }
+    html body [data-testid="stDownloadButton"] button:hover,
+    html body .stDownloadButton > button:hover,
+    html body .stButton > button:hover,
+    html body [data-testid="stFormSubmitButton"] > button:hover {
+        background: #550000 !important;
+        color: #f5e6b3 !important;
+        border-color: #f0d77a !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
