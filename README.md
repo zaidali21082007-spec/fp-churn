@@ -128,11 +128,45 @@ IBM Telco Customer Churn dataset (`data/WA_Fn-UseC_-Telco-Customer-Churn.csv`): 
 | Decision Tree | 0.797 | 0.668 | 0.468 | 0.550 | 0.838 |
 | KNN | 0.777 | 0.582 | 0.570 | 0.576 | 0.821 |
 
-Accuracy is the least useful number here because churners are the minority class. The Random Forest catches about half of churners, and about two-thirds of the customers it flags do churn. Actual churn rises from 8% in the Low tier to 79% in the Critical tier, so the risk probabilities are usefully calibrated.
+Accuracy is the least useful number here because churners are the minority class. The Random Forest catches about half of churners, and about two-thirds of the customers it flags do churn. Actual churn rises from 8.2% in the Low tier to 79.1% in the Critical tier, so the risk probabilities are usefully calibrated.
 
 **Key findings:**
 - Month-to-month contracts churn at 42.7%, compared with 11.3% on one-year and 2.8% on two-year contracts.
 - Automatic payment is associated with lower churn overall (16.0% vs 34.7%). Most of that gap comes from contract type: it narrows to 0.1 points on two-year contracts.
+
+## Business recommendations
+
+Each recommendation follows the Finding, Evidence, Recommendation, Expected Result format. These are associations from one data snapshot, so every action should be piloted with a control group before its effect is assumed.
+
+**1. Offer annual-contract discounts to month-to-month customers.**
+- **Finding:** Month-to-month customers churn at 42.71%, about 15 times the two-year rate of 2.83%.
+- **Evidence:** Churn Dashboard (revenue at risk by contract) and Churn Analysis (churn rate by contract).
+- **Recommendation:** Offer a discounted one-year or two-year contract, starting with High and Critical risk month-to-month customers.
+- **Expected result:** Month-to-month customers account for $120,847 of the $139,131 churned monthly revenue, so moving even part of this group to annual contracts protects the largest share of revenue. As an illustration, retaining 20% of that amount would be worth about $24,169 a month.
+
+**2. Move manual-payment customers to automatic payment.**
+- **Finding:** Automatic payment is associated with lower churn (16.0% vs 34.7%). The gap is 13.0 points on month-to-month contracts and 0.1 points on two-year contracts, so contract type explains much of it.
+- **Evidence:** Churn Analysis (auto-pay chart) and the within-contract gap table in notebook Section 4.1.
+- **Recommendation:** Offer a one-time bill credit for switching to automatic payment, kept separate from the contract discount so each effect can be measured.
+- **Expected result:** A smaller benefit than the raw 18.7-point difference suggests. Confirm with a pilot group before scaling.
+
+**3. Prioritize Senior Solo customers for outreach.**
+- **Finding:** 50.45% of Senior Solo customers are flagged High or Critical risk, the highest share of any segment. Solo customers account for the largest count (723 flagged).
+- **Evidence:** Retention Dashboard, high-risk customers by segment (in-sample scoring on all 7,043 customers).
+- **Recommendation:** Assign a named account contact or proactive check-in call to Senior Solo customers in the High and Critical tiers.
+- **Expected result:** Retention effort goes to the segment with the highest concentration of predicted risk. Measure whether churn among contacted customers falls relative to a control group.
+
+**4. Use the risk tiers to set outreach order.**
+- **Finding:** On held-out data, observed churn is 8.2% in the Low tier and 79.1% in the Critical tier. Among High and Critical customers, predicted churn (65.0%) closely matches observed churn (66.55%).
+- **Evidence:** Retention Dashboard (risk tiers), Model Comparison (ROC-AUC 0.844), and the calibration table in notebook Section 6.
+- **Recommendation:** Contact Critical customers first, then High. Use the Threshold Analysis page to choose a cutoff that matches the team's capacity.
+- **Expected result:** Effort goes to the customers most likely to leave instead of being spread across the whole base.
+
+**5. Run the monthly high-risk campaign with a control group.**
+- **Finding:** About 21% of customers fall in the High or Critical tiers. At the default 0.50 threshold, the model flags 296 test-set customers.
+- **Evidence:** Retention Dashboard (downloadable high-risk list) and Threshold Analysis (precision and recall at each threshold).
+- **Recommendation:** Export the high-risk list each month, contact a sample of it, and hold back a control group that receives no outreach.
+- **Expected result:** The business learns which action works and can measure the revenue it protects, rather than relying on the model score alone.
 
 ## Rubric mapping and data limitations
 
@@ -153,7 +187,7 @@ The assignment asked for several fields that this Telco dataset does not contain
 
 **Single snapshot.** The data is one point in time. The model cannot see how a customer's status changed over time.
 
-**In-sample scoring on the Retention Dashboard.** The dashboard scores all 7,043 customers, including the 80% used for training, so its figures (1,477 High+Critical customers, $76,430 monthly revenue at risk) run higher than out-of-sample results. The page carries a caption saying so. The notebook's Section 6 reports the held-out figures (296 High+Critical customers on the test set, about $15,000 monthly revenue at risk among those 1,409 customers).
+**In-sample scoring on the Retention Dashboard.** The dashboard scores all 7,043 customers, including the 80% used for training, so its figures (1,477 High+Critical customers, $76,429.55 expected monthly revenue at risk) run higher than out-of-sample results. The page carries a caption saying so. The notebook's Section 6 reports the held-out figures (296 High+Critical customers on the test set, about $15,030 expected monthly revenue at risk among those 1,409 customers).
 
 **KNN reproducibility.** The notebook reproduces the Random Forest results in `metrics.csv` exactly. The KNN row differs by one test-set prediction. The selected model is unaffected.
 
@@ -161,8 +195,8 @@ The assignment asked for several fields that this Telco dataset does not contain
 
 ```bash
 # 1. Clone and install dependencies
-git clone [YOUR REPO URL]
-cd [REPO FOLDER]
+git clone https://github.com/zaidali21082007-spec/fp-churn.git
+cd fp-churn
 pip install -r requirements.txt
 
 # 2. Train the model (creates models/final_pipeline.pkl and models/metrics.csv)
